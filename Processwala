@@ -1,0 +1,171 @@
+import React, { useState } from 'react';
+import { ChevronRight, Zap, GraduationCap, Users, Menu, X, Youtube, Mail } from 'lucide-react';
+
+// Mock Component for the Heat Exchanger Animation/Visual
+// In a real application, you would embed your GIF/Video here.
+const HeatExchangerVisual = () => (
+    <div className="bg-blue-100 p-6 rounded-xl shadow-lg border-2 border-blue-400">
+        <div className="flex justify-center items-center h-40 bg-blue-200/50 rounded-lg border-dashed border-2 border-blue-500">
+            <p className="text-blue-800 font-semibold text-center">
+                Your Animated Heat Exchanger Visual Goes Here!
+                <br/>
+                (Replace with your YouTube embed or GIF)
+            </p>
+        </div>
+        <p className="mt-4 text-sm text-gray-600">
+            *Example of our work: We make complex systems easy to grasp through animation.
+        </p>
+    </div>
+);
+
+
+const App = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const sections = [
+        { id: 'animations', title: 'Our Animations', icon: Zap },
+        { id: 'services', title: 'Services', icon: GraduationCap },
+        { id: 'about', title: 'About ProcessWala', icon: Users },
+        { id: 'contact', title: 'Contact', icon: Mail },
+    ];
+
+    const serviceItems = [
+        { title: "Custom 3D Animations", description: "Bring any process—from P&ID to complex machinery—to life with high-definition visuals.", icon: <Zap className="w-6 h-6 text-green-500" /> },
+        { title: "Engineering Training Modules", description: "Develop comprehensive, visual-led training content for students or professional teams.", icon: <GraduationCap className="w-6 h-6 text-green-500" /> },
+        { title: "Visual Content Consulting", description: "Review and optimize your existing educational materials for better clarity and engagement.", icon: <Users className="w-6 h-6 text-green-500" /> },
+    ];
+
+    const FooterLink = ({ Icon, text, href }) => (
+        <a href={href} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-white hover:text-blue-200 transition">
+            <Icon className="w-5 h-5" />
+            <span>{text}</span>
+        </a>
+    );
+
+    return (
+        <div className="min-h-screen bg-gray-50 font-inter">
+            {/* Header / Navigation */}
+            <header className="sticky top-0 z-50 bg-white shadow-md">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
+                    <div className="text-2xl font-bold text-blue-700">
+                        ProcessWala<span className="text-green-500">.com</span>
+                    </div>
+                    <nav className="hidden md:flex space-x-8">
+                        {sections.map(section => (
+                            <a key={section.id} href={`#${section.id}`} className="text-gray-600 hover:text-blue-700 font-medium transition duration-150 ease-in-out">
+                                {section.title}
+                            </a>
+                        ))}
+                    </nav>
+                    <button 
+                        className="md:hidden text-gray-600 hover:text-blue-700"
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    >
+                        {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                    </button>
+                </div>
+                
+                {/* Mobile Menu */}
+                {isMenuOpen && (
+                    <div className="md:hidden bg-white shadow-xl">
+                        {sections.map(section => (
+                            <a 
+                                key={section.id} 
+                                href={`#${section.id}`} 
+                                onClick={() => setIsMenuOpen(false)}
+                                className="block px-4 py-2 text-gray-700 hover:bg-blue-50 border-b transition"
+                            >
+                                {section.title}
+                            </a>
+                        ))}
+                    </div>
+                )}
+            </header>
+
+            <main>
+                {/* Hero Section */}
+                <section id="home" className="py-20 bg-gradient-to-r from-blue-700 to-indigo-800 text-white">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight">
+                            Simplify Complex Engineering Concepts
+                        </h1>
+                        <p className="text-xl sm:text-2xl font-light mb-8 opacity-90">
+                            Your Go-To Source for High-Quality Process Engineering Visuals and Explanations.
+                        </p>
+                        <a href="#animations" className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                            See Our Animations <ChevronRight className="w-5 h-5 ml-2" />
+                        </a>
+                    </div>
+                </section>
+
+                {/* Animations Showcase */}
+                <section id="animations" className="py-16 bg-white">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                        <h2 className="text-3xl font-bold text-gray-800 mb-4">Our Featured Work</h2>
+                        <p className="text-lg text-gray-600 mb-12 max-w-3xl mx-auto">
+                            We take intricate industrial processes and turn them into clear, engaging, and memorable visuals, like this heat exchanger demonstration.
+                        </p>
+                        <HeatExchangerVisual />
+                        <a href="#" className="mt-8 text-blue-600 font-semibold flex items-center justify-center hover:text-blue-800">
+                            View Full Animation Library <ChevronRight className="w-5 h-5 ml-1" />
+                        </a>
+                    </div>
+                </section>
+
+                {/* Services Section */}
+                <section id="services" className="py-16 bg-blue-50">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <h2 className="text-3xl font-bold text-gray-800 text-center mb-10">Services We Offer</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {serviceItems.map((item, index) => (
+                                <div key={index} className="bg-white p-6 rounded-xl shadow-lg border-t-4 border-green-500 hover:shadow-xl transition duration-300">
+                                    <div className="mb-4">{item.icon}</div>
+                                    <h3 className="text-xl font-semibold text-gray-900 mb-3">{item.title}</h3>
+                                    <p className="text-gray-600">{item.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+                
+                {/* About Section */}
+                <section id="about" className="py-16 bg-white">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                        <h2 className="text-3xl font-bold text-gray-800 mb-4">Who is ProcessWala?</h2>
+                        <p className="text-lg text-gray-600 max-w-4xl mx-auto">
+                            ProcessWala is dedicated to bridging the gap between complex industrial engineering concepts and accessible, visual learning. We believe that understanding the "how" and "why" of processes shouldn't require reading hundreds of pages—it should be intuitive, engaging, and visual. Our background in industrial engineering ensures accuracy and relevance in every animation we create.
+                        </p>
+                    </div>
+                </section>
+
+                {/* Contact Section */}
+                <section id="contact" className="py-16 bg-indigo-700 text-white">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                        <h2 className="text-3xl font-bold mb-4">Ready to Discuss Your Visual Needs?</h2>
+                        <p className="text-xl font-light mb-8">
+                            Get in touch to commission custom animations or inquire about training content.
+                        </p>
+                        <a href="mailto:info@processwala.com" className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                            <Mail className="w-5 h-5 mr-2" />
+                            Email Us Today
+                        </a>
+                    </div>
+                </section>
+            </main>
+
+            {/* Footer */}
+            <footer className="bg-gray-800 py-8">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-300">
+                    <p>&copy; 2025 ProcessWala. All rights reserved. | Built with zero budget, maximum expertise.</p>
+                    <div className="flex space-x-6 mt-4 md:mt-0">
+                        <FooterLink Icon={Youtube} text="YouTube Channel" href="https://www.youtube.com/@ProcessWala" />
+                        <FooterLink Icon={Mail} text="info@processwala.com" href="mailto:info@processwala.com" />
+                    </div>
+                </div>
+            </footer>
+        </div>
+    );
+};
+
+export default App;
+
